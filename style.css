@@ -1,0 +1,303 @@
+:root {
+    --target-air: 2000;
+    --target-step: 6500;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: "Poppins", system-ui;
+    margin: 0;
+    transition: .35s ease;
+    background: #0f0f0f;
+    color: #fff;
+}
+
+
+body.dark {
+    background: linear-gradient(145deg, #0f0f0f, #191a1f);
+}
+
+body.dark .container,
+body.dark .chart-wrapper {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+}
+
+body.dark .data-box,
+body.dark .progress,
+body.dark .data-box span {
+    color: #fff !important;
+}
+
+body.dark .data-box strong {
+    color: #b6e7ff !important;
+}
+
+
+body.light {
+    background: #f5f7fb;
+    color: #111;
+}
+
+body.light .container,
+body.light .chart-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+body.light .data-box strong {
+    color: #006dba;
+}
+
+
+.container {
+    width: 430px;
+    margin: 34px auto;
+    padding: 26px;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+}
+
+.container h1 {
+    text-align: center;
+    margin: 0 0 18px;
+    font-size: 22px;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.form-row select,
+.form-row input,
+.form-row button {
+    display: block;
+    width: 100%;
+}
+
+.form-row select,
+.form-row input {
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 15px;
+    transition: .25s;
+}
+
+.form-row .row-small {
+    display: flex;
+    gap: 10px;
+}
+
+.row-small button {
+    flex: 1;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #007aff, #00c6ff);
+    color: #fff;
+    padding: 13px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-reset {
+    background: linear-gradient(90deg, #ff3b30, #ff6b6b) !important;
+    color: #fff !important;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+}
+
+
+.data-box {
+    margin-top: 12px;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+
+.progress {
+    margin-top: 24px;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.progress .bar {
+    width: 100%;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.fill {
+    height: 100%;
+    width: 0;
+    border-radius: 20px;
+    animation: loadBar 1.1s ease forwards;
+}
+
+.fill-air {
+    background: linear-gradient(90deg, #00c6ff, #83eaf1);
+}
+
+.fill-step {
+    background: linear-gradient(90deg, #ff007b, #ffa3cf);
+}
+
+@keyframes loadBar {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: var(--val);
+    }
+}
+
+.badges {
+    margin-top: 20px;
+}
+
+.badges h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.badge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.badge {
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    transition: .35s;
+}
+
+.badge .badge-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+
+.badge.locked {
+    opacity: .35;
+    filter: grayscale(1);
+    transform: scale(.95);
+}
+
+
+.badge.unlocked {
+    opacity: 1;
+    filter: grayscale(0);
+    transform: scale(1.05);
+    box-shadow: 0 0 22px rgba(0, 255, 170, .32);
+    animation: badgePop .45s ease;
+}
+
+@keyframes badgePop {
+    from {
+        transform: scale(.6);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+
+.chart-wrapper {
+    width: 85%;
+    margin: 20px auto 60px;
+    padding: 18px;
+    border-radius: 14px;
+}
+
+.css-chart {
+    width: 100%;
+    height: 260px;
+    padding: 20px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.css-chart .bar-group {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: flex-end;
+    flex: 1;
+}
+
+.css-chart .bar {
+    width: 60px;
+    height: var(--h);
+    background: linear-gradient(180deg, #00d2ff, #007aff);
+    border-radius: 12px 12px 4px 4px;
+    transition: height .4s ease;
+}
+
+.css-chart .bar-step {
+    background: linear-gradient(180deg, #ff007b, #ff72c6);
+}
+
+.css-chart .bar span {
+    position: absolute;
+    bottom: -22px;
+    font-size: 12px;
+    opacity: .75;
+}
+
+
+@media(max-width:700px) {
+    .container {
+        width: 94%;
+        padding: 18px;
+    }
+
+    .chart-wrapper {
+        width: 94%;
+    }
+}
+
+
+input[type="number"] {
+    color: #fff !important;
+}
+
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+select {
+    color: #fff !important;
+}
+
+select option {
+    color: #fff !important;
+    background: #000 !important;
+}
