@@ -1,0 +1,14 @@
+[
+    {
+        "date": "2025-11-28",
+        "air": 1000,
+        "steps": 3500,
+        "mood": "Good \ud83d\ude0a"
+    },
+    {
+        "date": "2025-11-28",
+        "air": 2000,
+        "steps": 7000,
+        "mood": "Happy \ud83d\ude04"
+    }
+]
