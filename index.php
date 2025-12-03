@@ -8,7 +8,7 @@ if (!isset($_SESSION["user"])) {
 
 $username = $_SESSION["user"];
 
-// theme
+
 if (!isset($_SESSION['theme'])) {
     $_SESSION['theme'] = 'neon';
 }
@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_theme'])) {
 $theme = $_SESSION['theme'];
 $bodyClass = $theme === 'soft' ? 'dark theme-soft' : 'dark theme-neon';
 
-// load classes
+
 require_once __DIR__ . "/classes/HabitClasses.php";
 require_once __DIR__ . "/classes/Tracker.php";
 
-// helper mood text
+
 function moodDescription($m) {
     switch ($m) {
         case "😊": return "Bahagia & positif";
@@ -36,10 +36,10 @@ function moodDescription($m) {
     }
 }
 
-// init tracker
+
 $tracker = new Tracker($username);
 
-// init queue
+
 $userDir = "users/$username";
 if (!is_dir($userDir)) {
     mkdir($userDir, 0777, true);
@@ -57,10 +57,9 @@ function saveQueue($username, Queue $q) {
 $processedTask = null;
 $queueError    = '';
 
-// handle POST
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // tracker actions
     if (isset($_POST['undo'])) {
         $tracker->undo();
     }
@@ -80,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tracker->clearHistory();
     }
 
-    // queue actions
+  
     if (isset($_POST['clear_queue'])) {
         $queueObj->clear();
         saveQueue($username, $queueObj);
@@ -113,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// data view
+
 $air    = $tracker->getAir();
 $steps  = $tracker->getSteps();
 $mood   = $tracker->getMood();
@@ -128,7 +127,7 @@ $unlockWalker    = $badges['unlockWalker'];
 $unlockPerfect   = $badges['unlockPerfect'];
 $unlockWeekly    = $badges['unlockWeekly'];
 
-// tips
+
 $airIcon  = "💧";
 $stepIcon = "👣";
 $moodIcon = "😊";
@@ -155,9 +154,13 @@ if ($steps < 3000) {
 if ($mood === "😔") {
     $contextTips[] = "Mood lagi kurang oke, coba tarik napas dalam dan lakukan hal kecil yang kamu suka.";
 }
+if ($air >= 5000) {
+    $contextTips[] = "Kamu terlalu banyak minum air!";
+}
 if ($air >= 2000 && $steps >= 6500) {
     $contextTips[] = "Keren! Target air dan langkah sudah tercapai, pertahankan konsistensinya ya. 🎉";
 }
+
 
 $tipPool = !empty($contextTips) ? $contextTips : $baseTips;
 $tipOfTheDay = $tipPool[array_rand($tipPool)];
