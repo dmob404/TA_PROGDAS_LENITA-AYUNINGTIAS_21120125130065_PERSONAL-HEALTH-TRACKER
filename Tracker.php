@@ -1,6 +1,6 @@
 <?php
 
-// Queue untuk Productive Task Queue
+
 class Queue {
     private $items = [];
 
@@ -34,7 +34,7 @@ class Queue {
     }
 }
 
-// Tracker utama
+
 class Tracker
 {
     private string $username;
@@ -51,7 +51,7 @@ class Tracker
     {
         $this->username = $username;
 
-        // pastikan session sudah dimulai di index.php
+        
         if (!isset($_SESSION['air']))   $_SESSION['air'] = 0;
         if (!isset($_SESSION['steps'])) $_SESSION['steps'] = 0;
         if (!isset($_SESSION['mood']))  $_SESSION['mood'] = "-";
@@ -62,7 +62,7 @@ class Tracker
         $this->mood  = (string) $_SESSION['mood'];
         $this->stack = $_SESSION['stack'];
 
-        // user folder & log file
+        
         $this->userDir = "users/{$this->username}";
         if (!is_dir($this->userDir)) {
             mkdir($this->userDir, 0777, true);
@@ -77,7 +77,7 @@ class Tracker
         $this->log = is_array($log) ? $log : [];
     }
 
-    // ---------- PUBLIC API ----------
+    
 
     public function add(int $addAir, int $addSteps, ?string $newMood): void
     {
@@ -140,7 +140,7 @@ class Tracker
         $this->persistSession();
     }
 
-    // getters
+    
     public function getAir(): int     { return $this->air; }
     public function getSteps(): int   { return $this->steps; }
     public function getMood(): string { return $this->mood; }
@@ -175,7 +175,7 @@ class Tracker
         ];
     }
 
-    // ---------- INTERNAL ----------
+    
 
     private function pushSnapshot(): void
     {
@@ -255,3 +255,4 @@ class Tracker
         return true;
     }
 }
+
