@@ -72,7 +72,7 @@ project-root/
 └─ users/
    └─ <username>/
       ├─ log.json
-      └─ queue.json
+      
 ```
 
 ### Penjelasan File:
